@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "utilisateur",
+            "otherEntityName": "affectationClient",
+            "otherEntityRelationshipName": "utilisateur"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "utilisateur1",
+            "otherEntityName": "activite",
+            "otherEntityRelationshipName": "utilisateur"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prenom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "mail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresse",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "typeUtilisateur",
+            "fieldType": "TypeUtilisateur",
+            "fieldValues": "ADMINISTRATEUR,CONSULTANT"
+        }
+    ],
+    "changelogDate": "20170310134935",
+    "entityTableName": "utilisateur",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

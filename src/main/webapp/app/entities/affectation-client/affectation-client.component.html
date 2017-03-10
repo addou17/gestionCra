@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span>Affectation Clients</span>
+        <button class="btn btn-primary float-right create-affectation-client" [routerLink]="['/', { outlets: { popup: ['affectation-client-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Affectation Client
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="affectationClients">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Date Debut Mission</span></th>
+            <th><span>Date Fin Mission</span></th>
+            <th><span>Utilisateur</span></th>
+            <th><span>Client</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let affectationClient of affectationClients ;trackBy: trackId">
+                <td><a [routerLink]="['../affectation-client', affectationClient.id ]">{{affectationClient.id}}</a></td>
+                <td>{{affectationClient.dateDebutMission | date:'medium'}}</td>
+                <td>{{affectationClient.dateFinMission | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="affectationClient.utilisateur">
+                        <a [routerLink]="['../utilisateur', affectationClient.utilisateur?.id ]" >{{affectationClient.utilisateur?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="affectationClient.client">
+                        <a [routerLink]="['../client', affectationClient.client?.id ]" >{{affectationClient.client?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../affectation-client', affectationClient.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'affectation-client/'+ affectationClient.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'affectation-client/'+ affectationClient.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

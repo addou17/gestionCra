@@ -1,0 +1,41 @@
+
+<div *ngIf="affectationClient">
+    <h2><span>Affectation Client</span> {{affectationClient.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Date Debut Mission</span></dt>
+        <dd>
+            <span>{{affectationClient.dateDebutMission | date:'medium'}}</span>
+        </dd>
+        <dt><span>Date Fin Mission</span></dt>
+        <dd>
+            <span>{{affectationClient.dateFinMission | date:'medium'}}</span>
+        </dd>
+        <dt><span>Utilisateur</span></dt>
+        <dd>
+            <div *ngIf="affectationClient.utilisateur">
+                <a [routerLink]="['/utilisateur', affectationClient.utilisateur?.id]">{{affectationClient.utilisateur?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Client</span></dt>
+        <dd>
+            <div *ngIf="affectationClient.client">
+                <a [routerLink]="['/client', affectationClient.client?.id]">{{affectationClient.client?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'affectation-client/'+ affectationClient.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

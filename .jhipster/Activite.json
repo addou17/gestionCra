@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "utilisateur",
+            "otherEntityName": "utilisateur",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "activite",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "activite"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "estValide",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "commentaire",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170310134935",
+    "entityTableName": "activite",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

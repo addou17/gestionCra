@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "utilisateur",
+            "otherEntityName": "utilisateur",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dateDebutMission",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "dateFinMission",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20170310134935",
+    "entityTableName": "affectation_client",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

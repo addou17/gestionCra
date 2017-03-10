@@ -1,0 +1,53 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myActiviteLabel">Create or edit a Activite</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!activite.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="activite.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_date">Date</label>
+            <div class="d-flex">
+                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="activite.date"
+                  />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_estValide">Est Valide</label>
+            <input type="checkbox" class="form-control" name="estValide" id="field_estValide"
+                [(ngModel)]="activite.estValide"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_commentaire">Commentaire</label>
+            <input type="text" class="form-control" name="commentaire" id="field_commentaire"
+                [(ngModel)]="activite.commentaire"
+             />
+        </div>
+
+        <div class="form-group">
+            <label for="field_utilisateur">Utilisateur</label>
+            <select class="form-control" id="field_utilisateur" name="utilisateur" [(ngModel)]="activite.utilisateur" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="utilisateurOption.id === activite.utilisateur?.id ? activite.utilisateur : utilisateurOption" *ngFor="let utilisateurOption of utilisateurs; trackBy: trackUtilisateurById">{{utilisateurOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

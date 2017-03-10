@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "activite",
+            "otherEntityName": "activite",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170310134935",
+    "entityTableName": "action",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

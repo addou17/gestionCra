@@ -1,0 +1,58 @@
+entity Utilisateur{
+nom String,
+prenom String,
+telephone Long,
+mail String,
+adresse String,
+typeUtilisateur TypeUtilisateur
+}
+
+entity Client{
+nom String,
+adresse String,
+mail String,
+telephone Long
+}
+enum TypeUtilisateur {
+    ADMINISTRATEUR, CONSULTANT
+  }
+
+entity AffectationClient{
+dateDebutMission ZonedDateTime,
+dateFinMission ZonedDateTime
+}
+entity Action{
+description String
+}
+entity Activite{
+date ZonedDateTime,
+estValide Boolean,
+commentaire String
+}
+
+
+
+relationship OneToMany {
+	Utilisateur{utilisateur} to AffectationClient
+}
+relationship OneToMany {
+	Client{client} to AffectationClient
+}
+
+relationship OneToMany {
+	Activite{activite} to Action
+}
+relationship OneToMany {
+	Utilisateur{utilisateur1} to Activite
+}
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+//paginate Job with pagination
+
+//dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+// Set an angular suffix
+//angularSuffix * with mySuffix
