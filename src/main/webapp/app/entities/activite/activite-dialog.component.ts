@@ -8,6 +8,7 @@ import { EventManager, AlertService } from 'ng-jhipster';
 import { Activite } from './activite.model';
 import { ActivitePopupService } from './activite-popup.service';
 import { ActiviteService } from './activite.service';
+import { Utilisateur, UtilisateurService } from '../utilisateur';
 import { Action, ActionService } from '../action';
 @Component({
     selector: 'jhi-activite-dialog',
@@ -19,11 +20,14 @@ export class ActiviteDialogComponent implements OnInit {
     authorities: any[];
     isSaving: boolean;
 
+    utilisateurs: Utilisateur[];
+
     actions: Action[];
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: AlertService,
         private activiteService: ActiviteService,
+        private utilisateurService: UtilisateurService,
         private actionService: ActionService,
         private eventManager: EventManager
     ) {
@@ -32,6 +36,8 @@ export class ActiviteDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
+        this.utilisateurService.query().subscribe(
+            (res: Response) => { this.utilisateurs = res.json(); }, (res: Response) => this.onError(res.json()));
         this.actionService.query().subscribe(
             (res: Response) => { this.actions = res.json(); }, (res: Response) => this.onError(res.json()));
     }
@@ -65,6 +71,10 @@ export class ActiviteDialogComponent implements OnInit {
 
     private onError (error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    trackUtilisateurById(index: number, item: Utilisateur) {
+        return item.id;
     }
 
     trackActionById(index: number, item: Action) {

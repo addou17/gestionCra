@@ -22,10 +22,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="owner" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="date" type="timestamp">
                 <constraints nullable="true" />
             </column>
@@ -35,6 +31,10 @@
             </column>
 
             <column name="commentaire" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="utilisateur_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

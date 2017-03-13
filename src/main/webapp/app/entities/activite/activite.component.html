@@ -17,20 +17,24 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Owner</span></th>
             <th><span>Date</span></th>
             <th><span>Est Valide</span></th>
             <th><span>Commentaire</span></th>
+            <th><span>Utilisateur</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let activite of activites ;trackBy: trackId">
                 <td><a [routerLink]="['../activite', activite.id ]">{{activite.id}}</a></td>
-                <td>{{activite.owner}}</td>
                 <td>{{activite.date | date:'medium'}}</td>
                 <td>{{activite.estValide}}</td>
                 <td>{{activite.commentaire}}</td>
+                <td>
+                    <div *ngIf="activite.utilisateur">
+                        <a [routerLink]="['../utilisateur', activite.utilisateur?.id ]" >{{activite.utilisateur?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

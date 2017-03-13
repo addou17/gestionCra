@@ -4,10 +4,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span>Owner</span></dt>
-        <dd>
-            <span>{{activite.owner}}</span>
-        </dd>
         <dt><span>Date</span></dt>
         <dd>
             <span>{{activite.date | date:'medium'}}</span>
@@ -19,6 +15,12 @@
         <dt><span>Commentaire</span></dt>
         <dd>
             <span>{{activite.commentaire}}</span>
+        </dd>
+        <dt><span>Utilisateur</span></dt>
+        <dd>
+            <div *ngIf="activite.utilisateur">
+                <a [routerLink]="['/utilisateur', activite.utilisateur?.id]">{{activite.utilisateur?.id}}</a>
+            </div>
         </dd>
     </dl>
 

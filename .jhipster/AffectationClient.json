@@ -2,6 +2,12 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipName": "utilisateur",
+            "otherEntityName": "utilisateur",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
             "relationshipName": "client",
             "otherEntityName": "client",
             "relationshipType": "many-to-one",
@@ -9,10 +15,6 @@
         }
     ],
     "fields": [
-        {
-            "fieldName": "owner",
-            "fieldType": "Long"
-        },
         {
             "fieldName": "dateDebutMission",
             "fieldType": "ZonedDateTime"

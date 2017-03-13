@@ -42,9 +42,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GestioncraApp.class)
 public class AffectationClientResourceIntTest {
 
-    private static final Long DEFAULT_OWNER = 1L;
-    private static final Long UPDATED_OWNER = 2L;
-
     private static final ZonedDateTime DEFAULT_DATE_DEBUT_MISSION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_DATE_DEBUT_MISSION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
@@ -88,7 +85,6 @@ public class AffectationClientResourceIntTest {
      */
     public static AffectationClient createEntity(EntityManager em) {
         AffectationClient affectationClient = new AffectationClient()
-            .owner(DEFAULT_OWNER)
             .dateDebutMission(DEFAULT_DATE_DEBUT_MISSION)
             .dateFinMission(DEFAULT_DATE_FIN_MISSION);
         return affectationClient;
@@ -114,7 +110,6 @@ public class AffectationClientResourceIntTest {
         List<AffectationClient> affectationClientList = affectationClientRepository.findAll();
         assertThat(affectationClientList).hasSize(databaseSizeBeforeCreate + 1);
         AffectationClient testAffectationClient = affectationClientList.get(affectationClientList.size() - 1);
-        assertThat(testAffectationClient.getOwner()).isEqualTo(DEFAULT_OWNER);
         assertThat(testAffectationClient.getDateDebutMission()).isEqualTo(DEFAULT_DATE_DEBUT_MISSION);
         assertThat(testAffectationClient.getDateFinMission()).isEqualTo(DEFAULT_DATE_FIN_MISSION);
     }
@@ -149,7 +144,6 @@ public class AffectationClientResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(affectationClient.getId().intValue())))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.intValue())))
             .andExpect(jsonPath("$.[*].dateDebutMission").value(hasItem(sameInstant(DEFAULT_DATE_DEBUT_MISSION))))
             .andExpect(jsonPath("$.[*].dateFinMission").value(hasItem(sameInstant(DEFAULT_DATE_FIN_MISSION))));
     }
@@ -165,7 +159,6 @@ public class AffectationClientResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(affectationClient.getId().intValue()))
-            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.intValue()))
             .andExpect(jsonPath("$.dateDebutMission").value(sameInstant(DEFAULT_DATE_DEBUT_MISSION)))
             .andExpect(jsonPath("$.dateFinMission").value(sameInstant(DEFAULT_DATE_FIN_MISSION)));
     }
@@ -188,7 +181,6 @@ public class AffectationClientResourceIntTest {
         // Update the affectationClient
         AffectationClient updatedAffectationClient = affectationClientRepository.findOne(affectationClient.getId());
         updatedAffectationClient
-            .owner(UPDATED_OWNER)
             .dateDebutMission(UPDATED_DATE_DEBUT_MISSION)
             .dateFinMission(UPDATED_DATE_FIN_MISSION);
 
@@ -201,7 +193,6 @@ public class AffectationClientResourceIntTest {
         List<AffectationClient> affectationClientList = affectationClientRepository.findAll();
         assertThat(affectationClientList).hasSize(databaseSizeBeforeUpdate);
         AffectationClient testAffectationClient = affectationClientList.get(affectationClientList.size() - 1);
-        assertThat(testAffectationClient.getOwner()).isEqualTo(UPDATED_OWNER);
         assertThat(testAffectationClient.getDateDebutMission()).isEqualTo(UPDATED_DATE_DEBUT_MISSION);
         assertThat(testAffectationClient.getDateFinMission()).isEqualTo(UPDATED_DATE_FIN_MISSION);
     }
