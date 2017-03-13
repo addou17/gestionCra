@@ -22,14 +22,14 @@ public class AffectationClient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "owner")
+    private Long owner;
+
     @Column(name = "date_debut_mission")
     private ZonedDateTime dateDebutMission;
 
     @Column(name = "date_fin_mission")
     private ZonedDateTime dateFinMission;
-
-    @ManyToOne
-    private Utilisateur utilisateur;
 
     @ManyToOne
     private Client client;
@@ -40,6 +40,19 @@ public class AffectationClient implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOwner() {
+        return owner;
+    }
+
+    public AffectationClient owner(Long owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
     }
 
     public ZonedDateTime getDateDebutMission() {
@@ -66,19 +79,6 @@ public class AffectationClient implements Serializable {
 
     public void setDateFinMission(ZonedDateTime dateFinMission) {
         this.dateFinMission = dateFinMission;
-    }
-
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
-    }
-
-    public AffectationClient utilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-        return this;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
     }
 
     public Client getClient() {
@@ -118,6 +118,7 @@ public class AffectationClient implements Serializable {
     public String toString() {
         return "AffectationClient{" +
             "id=" + id +
+            ", owner='" + owner + "'" +
             ", dateDebutMission='" + dateDebutMission + "'" +
             ", dateFinMission='" + dateFinMission + "'" +
             '}';

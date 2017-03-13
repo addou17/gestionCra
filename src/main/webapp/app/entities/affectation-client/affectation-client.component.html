@@ -17,9 +17,9 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
+            <th><span>Owner</span></th>
             <th><span>Date Debut Mission</span></th>
             <th><span>Date Fin Mission</span></th>
-            <th><span>Utilisateur</span></th>
             <th><span>Client</span></th>
             <th></th>
             </tr>
@@ -27,13 +27,9 @@
             <tbody>
             <tr *ngFor="let affectationClient of affectationClients ;trackBy: trackId">
                 <td><a [routerLink]="['../affectation-client', affectationClient.id ]">{{affectationClient.id}}</a></td>
+                <td>{{affectationClient.owner}}</td>
                 <td>{{affectationClient.dateDebutMission | date:'medium'}}</td>
                 <td>{{affectationClient.dateFinMission | date:'medium'}}</td>
-                <td>
-                    <div *ngIf="affectationClient.utilisateur">
-                        <a [routerLink]="['../utilisateur', affectationClient.utilisateur?.id ]" >{{affectationClient.utilisateur?.id}}</a>
-                    </div>
-                </td>
                 <td>
                     <div *ngIf="affectationClient.client">
                         <a [routerLink]="['../client', affectationClient.client?.id ]" >{{affectationClient.client?.id}}</a>

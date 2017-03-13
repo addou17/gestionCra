@@ -42,6 +42,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GestioncraApp.class)
 public class ActiviteResourceIntTest {
 
+    private static final Long DEFAULT_OWNER = 1L;
+    private static final Long UPDATED_OWNER = 2L;
+
     private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
@@ -88,6 +91,7 @@ public class ActiviteResourceIntTest {
      */
     public static Activite createEntity(EntityManager em) {
         Activite activite = new Activite()
+            .owner(DEFAULT_OWNER)
             .date(DEFAULT_DATE)
             .estValide(DEFAULT_EST_VALIDE)
             .commentaire(DEFAULT_COMMENTAIRE);
@@ -114,6 +118,7 @@ public class ActiviteResourceIntTest {
         List<Activite> activiteList = activiteRepository.findAll();
         assertThat(activiteList).hasSize(databaseSizeBeforeCreate + 1);
         Activite testActivite = activiteList.get(activiteList.size() - 1);
+        assertThat(testActivite.getOwner()).isEqualTo(DEFAULT_OWNER);
         assertThat(testActivite.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testActivite.isEstValide()).isEqualTo(DEFAULT_EST_VALIDE);
         assertThat(testActivite.getCommentaire()).isEqualTo(DEFAULT_COMMENTAIRE);
@@ -149,6 +154,7 @@ public class ActiviteResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(activite.getId().intValue())))
+            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
             .andExpect(jsonPath("$.[*].estValide").value(hasItem(DEFAULT_EST_VALIDE.booleanValue())))
             .andExpect(jsonPath("$.[*].commentaire").value(hasItem(DEFAULT_COMMENTAIRE.toString())));
@@ -165,6 +171,7 @@ public class ActiviteResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(activite.getId().intValue()))
+            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.intValue()))
             .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)))
             .andExpect(jsonPath("$.estValide").value(DEFAULT_EST_VALIDE.booleanValue()))
             .andExpect(jsonPath("$.commentaire").value(DEFAULT_COMMENTAIRE.toString()));
@@ -188,6 +195,7 @@ public class ActiviteResourceIntTest {
         // Update the activite
         Activite updatedActivite = activiteRepository.findOne(activite.getId());
         updatedActivite
+            .owner(UPDATED_OWNER)
             .date(UPDATED_DATE)
             .estValide(UPDATED_EST_VALIDE)
             .commentaire(UPDATED_COMMENTAIRE);
@@ -201,6 +209,7 @@ public class ActiviteResourceIntTest {
         List<Activite> activiteList = activiteRepository.findAll();
         assertThat(activiteList).hasSize(databaseSizeBeforeUpdate);
         Activite testActivite = activiteList.get(activiteList.size() - 1);
+        assertThat(testActivite.getOwner()).isEqualTo(UPDATED_OWNER);
         assertThat(testActivite.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testActivite.isEstValide()).isEqualTo(UPDATED_EST_VALIDE);
         assertThat(testActivite.getCommentaire()).isEqualTo(UPDATED_COMMENTAIRE);

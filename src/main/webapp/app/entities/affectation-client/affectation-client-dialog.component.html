@@ -15,6 +15,12 @@
                    [(ngModel)]="affectationClient.id" readonly />
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_owner">Owner</label>
+            <input type="number" class="form-control" name="owner" id="field_owner"
+                [(ngModel)]="affectationClient.owner"
+             />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_dateDebutMission">Date Debut Mission</label>
             <div class="d-flex">
                 <input id="field_dateDebutMission" type="datetime-local" class="form-control" name="dateDebutMission" [(ngModel)]="affectationClient.dateDebutMission"
@@ -29,13 +35,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="field_utilisateur">Utilisateur</label>
-            <select class="form-control" id="field_utilisateur" name="utilisateur" [(ngModel)]="affectationClient.utilisateur" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="utilisateurOption.id === affectationClient.utilisateur?.id ? affectationClient.utilisateur : utilisateurOption" *ngFor="let utilisateurOption of utilisateurs; trackBy: trackUtilisateurById">{{utilisateurOption.id}}</option>
-            </select>
-        </div>
         <div class="form-group">
             <label for="field_client">Client</label>
             <select class="form-control" id="field_client" name="client" [(ngModel)]="affectationClient.client" >

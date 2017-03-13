@@ -1,23 +1,13 @@
-entity Utilisateur{
-nom String,
-prenom String,
-telephone Long,
-mail String,
-adresse String,
-typeUtilisateur TypeUtilisateur
-}
-
 entity Client{
 nom String,
 adresse String,
 mail String,
 telephone Long
 }
-enum TypeUtilisateur {
-    ADMINISTRATEUR, CONSULTANT
-  }
+
 
 entity AffectationClient{
+owner Long,
 dateDebutMission ZonedDateTime,
 dateFinMission ZonedDateTime
 }
@@ -25,6 +15,7 @@ entity Action{
 description String
 }
 entity Activite{
+owner Long,
 date ZonedDateTime,
 estValide Boolean,
 commentaire String
@@ -33,17 +24,11 @@ commentaire String
 
 
 relationship OneToMany {
-	Utilisateur{utilisateur} to AffectationClient
-}
-relationship OneToMany {
 	Client{client} to AffectationClient
 }
 
 relationship OneToMany {
 	Activite{activite} to Action
-}
-relationship OneToMany {
-	Utilisateur{utilisateur1} to Activite
 }
 
 // Set pagination options

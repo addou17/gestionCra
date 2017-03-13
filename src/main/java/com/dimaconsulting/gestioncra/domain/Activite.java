@@ -25,6 +25,9 @@ public class Activite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "owner")
+    private Long owner;
+
     @Column(name = "date")
     private ZonedDateTime date;
 
@@ -33,9 +36,6 @@ public class Activite implements Serializable {
 
     @Column(name = "commentaire")
     private String commentaire;
-
-    @ManyToOne
-    private Utilisateur utilisateur;
 
     @OneToMany(mappedBy = "activite")
     @JsonIgnore
@@ -48,6 +48,19 @@ public class Activite implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOwner() {
+        return owner;
+    }
+
+    public Activite owner(Long owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
     }
 
     public ZonedDateTime getDate() {
@@ -87,19 +100,6 @@ public class Activite implements Serializable {
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
-    }
-
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
-    }
-
-    public Activite utilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-        return this;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
     }
 
     public Set<Action> getActivites() {
@@ -151,6 +151,7 @@ public class Activite implements Serializable {
     public String toString() {
         return "Activite{" +
             "id=" + id +
+            ", owner='" + owner + "'" +
             ", date='" + date + "'" +
             ", estValide='" + estValide + "'" +
             ", commentaire='" + commentaire + "'" +

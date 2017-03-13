@@ -8,7 +8,6 @@ import { EventManager, AlertService } from 'ng-jhipster';
 import { AffectationClient } from './affectation-client.model';
 import { AffectationClientPopupService } from './affectation-client-popup.service';
 import { AffectationClientService } from './affectation-client.service';
-import { Utilisateur, UtilisateurService } from '../utilisateur';
 import { Client, ClientService } from '../client';
 @Component({
     selector: 'jhi-affectation-client-dialog',
@@ -20,14 +19,11 @@ export class AffectationClientDialogComponent implements OnInit {
     authorities: any[];
     isSaving: boolean;
 
-    utilisateurs: Utilisateur[];
-
     clients: Client[];
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: AlertService,
         private affectationClientService: AffectationClientService,
-        private utilisateurService: UtilisateurService,
         private clientService: ClientService,
         private eventManager: EventManager
     ) {
@@ -36,8 +32,6 @@ export class AffectationClientDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        this.utilisateurService.query().subscribe(
-            (res: Response) => { this.utilisateurs = res.json(); }, (res: Response) => this.onError(res.json()));
         this.clientService.query().subscribe(
             (res: Response) => { this.clients = res.json(); }, (res: Response) => this.onError(res.json()));
     }
@@ -71,10 +65,6 @@ export class AffectationClientDialogComponent implements OnInit {
 
     private onError (error) {
         this.alertService.error(error.message, null, null);
-    }
-
-    trackUtilisateurById(index: number, item: Utilisateur) {
-        return item.id;
     }
 
     trackClientById(index: number, item: Client) {

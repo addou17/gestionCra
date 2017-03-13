@@ -4,6 +4,10 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span>Owner</span></dt>
+        <dd>
+            <span>{{affectationClient.owner}}</span>
+        </dd>
         <dt><span>Date Debut Mission</span></dt>
         <dd>
             <span>{{affectationClient.dateDebutMission | date:'medium'}}</span>
@@ -11,12 +15,6 @@
         <dt><span>Date Fin Mission</span></dt>
         <dd>
             <span>{{affectationClient.dateFinMission | date:'medium'}}</span>
-        </dd>
-        <dt><span>Utilisateur</span></dt>
-        <dd>
-            <div *ngIf="affectationClient.utilisateur">
-                <a [routerLink]="['/utilisateur', affectationClient.utilisateur?.id]">{{affectationClient.utilisateur?.id}}</a>
-            </div>
         </dd>
         <dt><span>Client</span></dt>
         <dd>
